@@ -6,14 +6,7 @@ import {IAuthor} from "../Types/Types";
 
 const ReadingArea: React.FC = () => {
 
-    const [authors, setAuthors] = useState<IAuthor[] | null>([
-        {
-            name:"Prasad"
-        },
-        {
-            name:"Lakshan"
-        }
-    ]);
+    const [authors, setAuthors] = useState<IAuthor[] | null>(null);
 
     const handleOnAuthorChange = (authors: IAuthor[]) => {
       setAuthors(authors);

@@ -87,17 +87,18 @@ const Authors: React.FC<AuthorsProps> = (props) => {
     }
 
     useEffect(() => {
-        if (indexToEdit === null || !authors){
+        if (indexToEdit === null || !authors || !authors[indexToEdit]){
             return;
         }
         setAuthorNameToEdit(authors[indexToEdit].name);
-    },[onAuthorChange,authors,indexToEdit,authorNameToEdit]);
+    },[indexToEdit,authors]);
 
     return (
          <Row>
              <Header header="Authors"/>
-             <NoitemList itemtype="Author"/>
-             <AuthorList authors={authors} onAuthorDelete={handleOnAuthorDelete} onEditClicked={handleEditButtonClick}/>
+             {(!authors || authors.length === 0) && <NoitemList itemtype="Author"/>}
+             {(authors) && <AuthorList authors={authors} onAuthorDelete={handleOnAuthorDelete}
+                                       onEditClicked={handleEditButtonClick}/>}
              <PopupAlert alert={popupAlert} isPopupAlertShow={isShowPopupAlert}/>
              <AddItem item_type="Author" onAddClick={handleAddAuthorForm} />
              {FormRendering(isShowAuthorForm, editClicked)}
