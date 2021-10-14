@@ -5,10 +5,12 @@ import Author from "./Author";
 
 type AuthorListProps = {
     authors: IAuthor[] | null
+    onEditClicked: (bool:boolean, index:number) => void,
+    onAuthorDelete: (id:number) => void,
 }
 const AuthorList: React.FC<AuthorListProps> = (props) => {
 
-    const {authors} = props
+    const {authors, onEditClicked, onAuthorDelete} = props
 
     return (
         <Row className="pe-0 me-0 my-0">
@@ -18,7 +20,8 @@ const AuthorList: React.FC<AuthorListProps> = (props) => {
                         {
                             return (
                                 <ListGroup.Item key={index} className="border-0 px-0 me-0 py-0 my-0">
-                                    <Author author={author} index={index}/>
+                                    <Author author={author} index={index} onAuthorDelete={onAuthorDelete}
+                                            onEditClicked={onEditClicked}/>
                                 </ListGroup.Item>
                             )
                         })
