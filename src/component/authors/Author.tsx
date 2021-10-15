@@ -8,7 +8,7 @@ import DeletePopup from "../common/DeletePopup";
 type AuthorProps = {
     author: IAuthor,
     index: number,
-    onEditClicked:(boo:boolean, index: number) => void,
+    onEditClicked:(bool:boolean, index: number) => void,
     onAuthorDelete: (id:number) => void
 }
 

@@ -13,7 +13,7 @@ type BookFormProps = {
     onCloseClick: () => void,
     editClicked: boolean,
     onCreateBookSubmit: (newBook: IBook) => void,
-    authorList: IAuthor[] | null;
+    authorList: IAuthor[] | null,
 }
 
 const BookForm: React.FC<BookFormProps> = (props) => {
@@ -113,7 +113,6 @@ const BookForm: React.FC<BookFormProps> = (props) => {
         }
         setOptionList(options)
     }, [authorList]);
-
 
     return (
         <Col xs={12} lg={10} className="form mt-5 px-0 ms-lg-2">

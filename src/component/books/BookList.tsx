@@ -7,11 +7,13 @@ import Book from "./Book";
 
 type BookListProps = {
     books: IBook[] | null;
+    onUpdateClick: (bool: boolean, index: number, book: IBook) => void;
+    onBookDelete: (id: number) => void;
 };
 
 const BookList: React.FC<BookListProps> = (props) => {
 
-    const {books} = props;
+    const {books, onUpdateClick, onBookDelete} = props;
 
     return (
         <Row className="pe-0 me-0 my-0">
@@ -21,7 +23,8 @@ const BookList: React.FC<BookListProps> = (props) => {
                     {
                         return (
                             <ListGroup.Item key={index} className="border-0 px-0 me-0 py-0 my-0">
-                                <Book book={book} index={index}/>
+                                <Book book={book} index={index} onBookDelete={onBookDelete}
+                                      onUpdateClick={onUpdateClick}/>
                             </ListGroup.Item>
                         )
                     })
