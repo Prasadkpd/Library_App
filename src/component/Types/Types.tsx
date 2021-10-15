@@ -6,3 +6,14 @@ export interface IPopupAlert {
     alert:string,
     className:string
 }
+
+export interface IBook {
+    name: string,
+    isbn: string,
+    author: IAuthor
+}
+
+export interface selectorOptionType {
+    label: string,
+    value: IAuthor
+}
