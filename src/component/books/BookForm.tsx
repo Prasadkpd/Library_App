@@ -14,11 +14,12 @@ type BookFormProps = {
     editClicked: boolean,
     onCreateBookSubmit: (newBook: IBook) => void,
     authorList: IAuthor[] | null,
+    book: IBook | null
 }
 
 const BookForm: React.FC<BookFormProps> = (props) => {
 
-    const {task, onCloseClick, editClicked, onCreateBookSubmit, authorList} = props;
+    const {task, onCloseClick, editClicked, onCreateBookSubmit, authorList,book} = props;
     const [title, setTitle] = useState<string | null>(null);
     const [price, setPrice] = useState<string | null>(null);
     const [author, setAuthor] = useState<IAuthor | null>(null);
@@ -114,6 +115,14 @@ const BookForm: React.FC<BookFormProps> = (props) => {
         setOptionList(options)
     }, [authorList]);
 
+    useEffect(() => {
+        if(!book){
+            return;
+        }
+        setTitle(book.name);
+        setPrice(book.price);
+    },[book]);
+
     return (
         <Col xs={12} lg={10} className="form mt-5 px-0 ms-lg-2">
             <Col xs={12} lg={12} md={12}>
@@ -132,7 +141,7 @@ const BookForm: React.FC<BookFormProps> = (props) => {
                     <Form.Group>
                         <Form.Label className="mb-1 form-label ms-1">Book Title</Form.Label>
                         <Form.Control type="text" required className='form-input py-lg-1'
-                                      onChange={handleOnTitleChange}/>
+                                      onChange={handleOnTitleChange} value={title ? title : ''}/>
                         <FormControl.Feedback type='invalid'>
                             <p className="text-danger fw-bold">Please Enter Book title</p>
                         </FormControl.Feedback>
@@ -143,7 +152,8 @@ const BookForm: React.FC<BookFormProps> = (props) => {
                                         prefix={prefix}
                                         step={1}
                                         className={`form-control form-input`}
-                                        onValueChange={handleOnPriceChange}/>
+                                        onValueChange={handleOnPriceChange}
+                                       value={price ? price : 0}/>
                         <FormControl.Feedback type='invalid'>
                             <p className="text-danger fw-bold">{errorMessage}</p>
                         </FormControl.Feedback>

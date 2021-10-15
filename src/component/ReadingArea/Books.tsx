@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Row} from "react-bootstrap";
 import Header from "../common/Header";
 import {IAuthor, IBook, IPopupAlert} from "../Types/Types";
@@ -21,7 +21,7 @@ const Books: React.FC<BooksProps> = (props) => {
     const [popupAlert, setPopupAlert] = useState<IPopupAlert | null>(null);
     const [isShowPopupAlert,setIsShowPopupAlert] = useState<boolean>(false);
     const [indexToEdit, setIndexToEdit] = useState<number | null> (null);
-    const [BookToEdit, setBookToEdit] = useState<IBook | null>(null);
+    const [bookToEdit, setBookToEdit] = useState<IBook | null>(null);
 
     const handleAddBookForm = () => {
       setEditClicked(false);
@@ -47,10 +47,8 @@ const Books: React.FC<BooksProps> = (props) => {
     const handleEditButtonClick = (bool: boolean, index: number, book: IBook) => {
         setEditClicked(bool);
         setIsShowBookForm(bool);
-        if (book) {
-            setIndexToEdit(index);
-            setBookToEdit(book);
-        }
+        setIndexToEdit(index);
+
     }
 
     const handleOnUpdateBookSubmit = (newBook: IBook) => {
@@ -87,17 +85,24 @@ const Books: React.FC<BooksProps> = (props) => {
         if(isShowBookForm){
             if(!editClicked){
                 return <BookForm task="Create" onCloseClick={handleCloseBookForm} editClicked={false}
-                                 onCreateBookSubmit={handleOnCreateBookSubmit} authorList={authors} />
+                                 onCreateBookSubmit={handleOnCreateBookSubmit} authorList={authors} book={null}/>
             }
             else {
                 return <BookForm task="Update" onCloseClick={handleCloseBookForm} editClicked={true}
-                                 onCreateBookSubmit={handleOnUpdateBookSubmit} authorList={authors}/>
+                                 onCreateBookSubmit={handleOnUpdateBookSubmit} authorList={authors} book={bookToEdit}/>
             }
         }
     }
 
+    useEffect(() => {
+        if (indexToEdit === null || !books || !books[indexToEdit]){
+            return;
+        }
+        setBookToEdit(books[indexToEdit]);
+    },[indexToEdit,books]);
 
-    
+
+
     return (
         <Row>
             <Header header={"Books"}/>
