@@ -38,7 +38,7 @@ const PopupAlert: React.FC<PopupAlertProps> = (props) => {
                     {popupAlert?.alert}
                 </Col>
                 <Col lg={1} xs={2} className="pe-0">
-                    <FiX onClick={handleClosePopupAlert} size={22}/>
+                    <FiX onClick={handleClosePopupAlert} className='popup-close' size={22}/>
                 </Col>
             </Row>
             }

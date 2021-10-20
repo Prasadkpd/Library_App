@@ -1,117 +1,124 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from "react";
 import {Row} from "react-bootstrap";
-import Header from "../common/Header";
 import {IAuthor, IBook, IPopupAlert} from "../Types/Types";
-import NoitemList from "../common/NoitemList";
-import BookList from "../books/BookList";
-import AddItem from "../common/AddItem";
+import Header from "../common/Header";
 import BookForm from "../books/BookForm";
+import BookList from "../books/BookList";
+import NoitemList from "../common/NoitemList";
 import PopupAlert from "../common/PopUpAlert";
+import AddItem from "../common/AddItem";
+import EditBook from "../books/EditBook";
 
 type BooksProps = {
-    authors: IAuthor[] | null
-}
+    authors: IAuthor[] | null;
+};
 
 const Books: React.FC<BooksProps> = (props) => {
-
-    const {authors} = props;
-    const [books, setBooks] = useState<IBook[] | null>(null);
-    const [isShowBookForm, setIsShowBookForm] = useState<boolean>(false);
+    const [bookList, setBookList] = useState<IBook[] | null>(null);
+    const [showBookForm, setShowBookForm] = useState<boolean>(false);
     const [editClicked, setEditClicked] = useState<boolean>(false);
+    const [indexToEdit, setIndexToEdit] = useState<number | null>(null);
+    const [bookNameToEdit, setBookNameToEdit] = useState<IBook | null>(null);
     const [popupAlert, setPopupAlert] = useState<IPopupAlert | null>(null);
-    const [isShowPopupAlert,setIsShowPopupAlert] = useState<boolean>(false);
-    const [indexToEdit, setIndexToEdit] = useState<number | null> (null);
-    const [bookToEdit, setBookToEdit] = useState<IBook | null>(null);
+    const [showPopupAlert, setShowPopupAlert] = useState<boolean>(false);
 
     const handleAddBookForm = () => {
-      setEditClicked(false);
-      setIsShowBookForm(true);
-    }
-    
+        setEditClicked(false);
+        setShowBookForm(true);
+    };
+
     const handleCloseBookForm = () => {
-      setEditClicked(false);
-      setIsShowBookForm(false);
-    }
+        setEditClicked(false);
+        setShowBookForm(false);
+    };
 
     const handleOnCreateBookSubmit = (newBook: IBook) => {
-      const newBookList: IBook[] = books ? books.slice() : [];
-      newBookList.push(newBook);
-      setBooks(newBookList);
-      setPopupAlert({
-          alert: "New Book added Successfully",
-          className:"alert-success"
-      });
-      setIsShowPopupAlert(true);
+        const books: IBook[] = bookList ? bookList.slice() : [];
+        books.push(newBook);
+        setBookList(books);
+        setPopupAlert({
+            alert: "New Book added Successfully",
+            className: "alert-success",
+        });
+        setShowPopupAlert(true);
+    };
+
+    const handleOnBookDelete = (index: number) => {
+        if (!bookList) {
+            return;
+        }
+        const books: IBook[] = bookList.slice();
+        books.splice(index, 1);
+        setBookList(books);
+        handleCloseBookForm();
+        setPopupAlert({
+            alert: " Book Deleted Successfully",
+            className: "alert-danger",
+        });
+        setShowPopupAlert(true);
     };
 
     const handleEditButtonClick = (bool: boolean, index: number, book: IBook) => {
         setEditClicked(bool);
-        setIsShowBookForm(bool);
-        setIndexToEdit(index);
+        setShowBookForm(bool);
+        if (book) {
+            setIndexToEdit(index);
+            setBookNameToEdit(book);
+        }
+    };
 
-    }
-
-    const handleOnUpdateBookSubmit = (newBook: IBook) => {
-        if (indexToEdit === null) {
+    const handleOnUpdateBookSubmit = (
+        index: number | null,
+        updatedBook: IBook
+    ) => {
+        if (!bookList || index == null) {
             return;
         }
-        const newBookList: IBook[] = books ? books.slice() : [];
-        newBookList.splice(indexToEdit,1,newBook)
-        setBooks(newBookList);
-        setPopupAlert({
-            alert: "New Book Updated Successfully",
-            className:"alert-warning"
-        });
-        setIsShowPopupAlert(true);
+        const books: IBook[] = bookList.slice();
+        books[index] = updatedBook;
+        setBookList(books);
         handleCloseBookForm();
-    }
-    
-    const handleOnBookDelete = (id: number) => {
-      if (!books){
-          return;
-      }
-      const newBookList: IBook[] = books ? books.slice() : [];
-      newBookList.splice(id, 1);
-      setBooks(newBookList);
-      setPopupAlert({
-          alert: "New Book Deleted Successfully",
-          className:"alert-danger"
-      });
-      setIsShowPopupAlert(true);
-    }
-
-    
-    const FormRendering = (isShowBookForm: boolean, editClicked:boolean) => {
-        if(isShowBookForm){
-            if(!editClicked){
-                return <BookForm task="Create" onCloseClick={handleCloseBookForm} editClicked={false}
-                                 onCreateBookSubmit={handleOnCreateBookSubmit} authorList={authors} book={null}/>
-            }
-            else {
-                return <BookForm task="Update" onCloseClick={handleCloseBookForm} editClicked={true}
-                                 onCreateBookSubmit={handleOnUpdateBookSubmit} authorList={authors} book={bookToEdit}/>
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (indexToEdit === null || !books || !books[indexToEdit]){
-            return;
-        }
-        setBookToEdit(books[indexToEdit]);
-    },[indexToEdit,books]);
-
-
+        setPopupAlert({
+            alert: " Book Updated Successfully",
+            className: "alert alert-warning",
+        });
+        setShowPopupAlert(true);
+    };
 
     return (
-        <Row>
-            <Header header={"Books"}/>
-            {(!books || books.length === 0) && <NoitemList itemtype="Books"/>}
-            {(books) && <BookList books={books} onUpdateClick={handleEditButtonClick}
-                                  onBookDelete={handleOnBookDelete}/>}
-            <PopupAlert alert={popupAlert} isPopupAlertShow={isShowPopupAlert}/>
-            <AddItem item_type={"Book"} onAddClick={handleAddBookForm}/>
-            {FormRendering(isShowBookForm,editClicked)}
+        <Row className="books">
+            <Header header="Books"/>
+            {bookList && bookList.length !== 0 ? (
+                <BookList
+                    books={bookList}
+                    onDeleteBook={handleOnBookDelete}
+                    onEditButtonClick={handleEditButtonClick}
+                />
+            ) : (
+                <NoitemList itemtype='books'/>
+            )}
+
+            <PopupAlert
+                alert={popupAlert}
+                isPopupAlertShow={showPopupAlert}
+            />
+            <AddItem onAddClick={handleAddBookForm} item_type="Books"/>
+            {showBookForm &&
+            (!editClicked ? (
+                <BookForm
+                    authorList={props.authors}
+                    onCloseClick={handleCloseBookForm}
+                    onCreateBookSubmit={handleOnCreateBookSubmit}
+                />
+            ) : (
+                <EditBook
+                    onCloseClick={handleCloseBookForm}
+                    onUpdateAuthor={handleOnUpdateBookSubmit}
+                    authorList={props.authors}
+                    index={indexToEdit}
+                    book={bookNameToEdit}
+                />
+            ))}
         </Row>
     );
 };
