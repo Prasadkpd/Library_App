@@ -9,7 +9,7 @@ export interface IPopupAlert {
 
 export interface IBook {
     name: string,
-    isbn: string,
+    price: string,
     author: IAuthor
 }
 
