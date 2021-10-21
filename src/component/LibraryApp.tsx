@@ -2,6 +2,7 @@ import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import WelcomeView from "./welcome/WelcomeView";
 import ReadingArea from "./ReadingArea/ReadingArea";
+import Footer from "./common/Footer";
 
 const LibraryApp: React.FC = () => {
     return (
@@ -13,6 +14,9 @@ const LibraryApp: React.FC = () => {
                 <Col xs={12}>
                     <ReadingArea/>
                 </Col>
+            </Row>
+            <Row>
+                <Footer/>
             </Row>
         </Container>
     );

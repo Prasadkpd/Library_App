@@ -19,7 +19,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $md-screen-size) {
   .item {
     background-color: transparent;
 
