@@ -10,23 +10,23 @@ type PopupAlertProps = {
 
 const PopupAlert: React.FC<PopupAlertProps> = (props) => {
 
-    const {alert} = props;
+    const {alert, isPopupAlertShow} = props;
     const [popupAlert, setPopupAlert] = useState<IPopupAlert | null>(null);
-    const [isShowPopupAlert, setShowPopupAlert] = useState<Boolean>(false);
+    const [isShowPopupAlert, setIsShowPopupAlert] = useState<Boolean>(false);
 
     const handleClosePopupAlert = () => {
-        setShowPopupAlert(false);
+        setIsShowPopupAlert(false);
     }
 
     useEffect(() => {
         if (alert) {
             setPopupAlert(alert);
-            setShowPopupAlert(isShowPopupAlert);
+            setIsShowPopupAlert(isPopupAlertShow);
         }
         setTimeout(() => {
-            setShowPopupAlert(false)
+            setIsShowPopupAlert(false)
         }, 10000);
-    }, [alert, isShowPopupAlert])
+    }, [alert, isPopupAlertShow])
 
 
     return (
