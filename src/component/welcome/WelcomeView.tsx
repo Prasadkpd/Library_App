@@ -9,7 +9,7 @@ const WelcomeView: React.FC = () => {
                 <h1 className="my-2">My Library</h1>
             </Col>
             <Col xs={12} className="mx-0 px-0">
-                <Image src={WelcomeImg} alt="Library Image" />
+                <Image src={WelcomeImg} alt="Library Image"/>
             </Col>
             <Col xs={12} className="credits text-end pe-lg-5 pe-3 pe-md-3 pt-1">
                 Photo by{" "}

@@ -2,16 +2,17 @@ import React from 'react';
 import {Button, Modal} from "react-bootstrap";
 
 type DeletePopupProps = {
-    onDeletePopupClose:() => void
+    onDeletePopupClose: () => void
     showDeletePopup: boolean
-    onDelete:() => void
+    onDelete: () => void
 }
 
 const DeletePopup: React.FC<DeletePopupProps> = (props) => {
 
-    return (
+    const { onDeletePopupClose, showDeletePopup, onDelete} = props;
 
-        <Modal show={props.showDeletePopup} onHide={props.onDeletePopupClose} >
+    return (
+        <Modal show={showDeletePopup} onHide={onDeletePopupClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Deletion</Modal.Title>
             </Modal.Header>
@@ -19,12 +20,12 @@ const DeletePopup: React.FC<DeletePopupProps> = (props) => {
                 Do you really want to delete this?
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={props.onDeletePopupClose}>
+                <Button variant="secondary" onClick={onDeletePopupClose}>
                     Close
                 </Button>
-                <Button variant="danger" onClick={() =>{
-                    props.onDeletePopupClose();
-                    props.onDelete();
+                <Button variant="danger" onClick={() => {
+                    onDeletePopupClose();
+                    onDelete();
                 }
                 }>Delete This</Button>
             </Modal.Footer>

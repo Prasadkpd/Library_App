@@ -1,13 +1,13 @@
 @import "variables";
 
 .reading-area {
-  .header{
-      color: $header-color;
-      border-bottom: 2px solid $header-border-color;
+  .header {
+    color: $header-color;
+    border-bottom: 2px solid $header-border-color;
   }
 }
 
-.no-item-list{
+.no-item-list {
   font-style: italic;
   font-size: 1.1em;
   font-weight: 600;

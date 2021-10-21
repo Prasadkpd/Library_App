@@ -27,7 +27,7 @@ const Book: React.FC<BookProps> = (props) => {
                 </Col>
                 <Col xs="4" lg="3" className="text-end">
                     <FiEdit
-                        className="mx-lg-2 icons text-warning"
+                        className="mx-lg-2 icons text-warning mx-md-3 mx-3"
                         onClick={() => onUpdateClick(true, index, book)}
                         size={22}
                     />

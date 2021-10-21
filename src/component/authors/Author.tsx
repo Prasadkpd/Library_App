@@ -25,7 +25,8 @@ const Author: React.FC<AuthorProps> = (props) => {
                     <h5 className="p-0">{index + 1}. {author.name}</h5>
                 </Col>
                 <Col xs="4" lg="3" className="text-end">
-                    <FiEdit className="mx-lg-2 icons text-warning" onClick={() => onEditClicked(true, index)}/>
+                    <FiEdit className="mx-lg-2 icons text-warning mx-md-3 mx-3"
+                            onClick={() => onEditClicked(true, index)}/>
                     <FiTrash2 className="icons text-danger mx-1" onClick={handleDeletePopUpShow}/>
                 </Col>
             </Row>

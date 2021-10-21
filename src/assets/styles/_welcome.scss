@@ -1,20 +1,22 @@
 @import "variables";
 
 .welcome {
-  h1{
+  h1 {
     font-weight: 700;
     font-size: 3em;
     color: $font-color;
   }
-  img{
+
+  img {
     width: 100%;
     height: auto;
   }
 
-  .credits{
+  .credits {
     font-weight: 500;
     position: relative;
   }
+
   @media (max-width: 576px) {
     h1 {
       font-size: 2em;

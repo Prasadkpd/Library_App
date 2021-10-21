@@ -4,7 +4,7 @@ import {IAuthor, IBook, IPopupAlert} from "../Types/Types";
 import Header from "../common/Header";
 import BookForm from "../books/BookForm";
 import BookList from "../books/BookList";
-import NoitemList from "../common/NoitemList";
+import NoItemList from "../common/NoItemList";
 import PopupAlert from "../common/PopUpAlert";
 import AddItem from "../common/AddItem";
 import EditBook from "../books/EditBook";
@@ -14,6 +14,8 @@ type BooksProps = {
 };
 
 const Books: React.FC<BooksProps> = (props) => {
+
+    const {authors} = props;
     const [bookList, setBookList] = useState<IBook[] | null>(null);
     const [showBookForm, setShowBookForm] = useState<boolean>(false);
     const [editClicked, setEditClicked] = useState<boolean>(false);
@@ -95,7 +97,7 @@ const Books: React.FC<BooksProps> = (props) => {
                     onEditButtonClick={handleEditButtonClick}
                 />
             ) : (
-                <NoitemList itemtype='books'/>
+                <NoItemList itemType='books'/>
             )}
 
             <PopupAlert
@@ -106,7 +108,7 @@ const Books: React.FC<BooksProps> = (props) => {
             {showBookForm &&
             (!editClicked ? (
                 <BookForm
-                    authorList={props.authors}
+                    authorList={authors}
                     onCloseClick={handleCloseBookForm}
                     onCreateBookSubmit={handleOnCreateBookSubmit}
                 />
@@ -114,7 +116,7 @@ const Books: React.FC<BooksProps> = (props) => {
                 <EditBook
                     onCloseClick={handleCloseBookForm}
                     onUpdateAuthor={handleOnUpdateBookSubmit}
-                    authorList={props.authors}
+                    authorList={authors}
                     index={indexToEdit}
                     book={bookNameToEdit}
                 />
