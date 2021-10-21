@@ -1,10 +1,10 @@
 export interface IAuthor {
-    name:string
+    name: string
 }
 
 export interface IPopupAlert {
-    alert:string,
-    className:string
+    alert: string,
+    className: string
 }
 
 export interface IBook {

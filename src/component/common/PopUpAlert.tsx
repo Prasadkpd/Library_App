@@ -11,33 +11,33 @@ type PopupAlertProps = {
 const PopupAlert: React.FC<PopupAlertProps> = (props) => {
 
     const {alert} = props;
-    const [popupAlert, setPopupAlert] = useState<IPopupAlert | null >(null);
-    const [isPopupAlertShow, setPopupAlertShow] = useState<Boolean>(false);
+    const [popupAlert, setPopupAlert] = useState<IPopupAlert | null>(null);
+    const [isShowPopupAlert, setShowPopupAlert] = useState<Boolean>(false);
 
     const handleClosePopupAlert = () => {
-        setPopupAlertShow(false);
+        setShowPopupAlert(false);
     }
 
-    useEffect(() =>{
-        if(alert) {
+    useEffect(() => {
+        if (alert) {
             setPopupAlert(alert);
-            setPopupAlertShow(props.isPopupAlertShow);
+            setShowPopupAlert(isShowPopupAlert);
         }
         setTimeout(() => {
-            setPopupAlertShow(false)
-        },2000);
-    },[alert, props.isPopupAlertShow])
+            setShowPopupAlert(false)
+        }, 10000);
+    }, [alert, isShowPopupAlert])
 
 
     return (
         <React.Fragment>
-            {isPopupAlertShow &&
-            <Row xs={12} className={popupAlert?.className + " p-1 d-flex align-items-center pop_up"}>
+            {isShowPopupAlert &&
+            <Row xs={12} className={popupAlert?.className + " mt-2 p-1 d-flex align-items-center pop_up m-auto"}>
                 <Col lg={11} xs={10} className='d-flex align-items-center'>
                     <FiMessageCircle className="me-1" size={22}/>
                     {popupAlert?.alert}
                 </Col>
-                <Col lg={1} xs={2} className="pe-0">
+                <Col lg={1} xs={2} className="pe-0 text-center">
                     <FiX onClick={handleClosePopupAlert} className='popup-close' size={22}/>
                 </Col>
             </Row>

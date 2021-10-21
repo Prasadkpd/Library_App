@@ -8,7 +8,7 @@ const LibraryApp: React.FC = () => {
         <Container fluid={true}>
             <Row>
                 <Col xs={12}>
-                    <WelcomeView />
+                    <WelcomeView/>
                 </Col>
                 <Col xs={12}>
                     <ReadingArea/>
