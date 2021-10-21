@@ -17,7 +17,7 @@
     position: relative;
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: $xs-screen-size) {
     h1 {
       font-size: 2em;
     }
