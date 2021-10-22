@@ -5,7 +5,7 @@ import WelcomeImg from "./../../assets/images/welcome-library.webp"
 const WelcomeView: React.FC = () => {
     return (
         <Row className="welcome">
-            <Col xs={12} className="text-center">
+            <Col xs={12} className="text-lg-center">
                 <h1 className="my-2">My Library</h1>
             </Col>
             <Col xs={12} className="mx-0 px-0">
