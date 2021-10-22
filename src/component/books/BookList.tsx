@@ -20,7 +20,7 @@ const BookList: React.FC<BookListProps> = (props) => {
                     <ListGroup className="mt-0">
                         {books.map((book: IBook, index: number) => {
                             return (
-                                <ListGroup.Item className="border-0 px-0 me-0 py-0 my-1" key={index}>
+                                <ListGroup.Item className="border-0 px-0 me-0 py-0" key={index}>
                                     <Book
                                         onBookDelete={onDeleteBook}
                                         onUpdateClick={onEditButtonClick}
