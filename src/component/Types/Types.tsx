@@ -1,19 +1,19 @@
 export interface IAuthor {
-    name: string
+  name: string
 }
 
 export interface IPopupAlert {
-    alert: string,
-    className: string
+  alert: string,
+  className: string
 }
 
 export interface IBook {
-    name: string,
-    price: string,
-    author: IAuthor
+  name: string,
+  price: string,
+  author: IAuthor
 }
 
 export interface selectorOptionType {
-    label: string,
-    value: IAuthor
+  label: string,
+  value: IAuthor
 }
