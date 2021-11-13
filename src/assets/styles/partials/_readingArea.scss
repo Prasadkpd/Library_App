@@ -1,0 +1,25 @@
+@import "variables";
+
+.reading-area {
+  .header {
+    color: $header-color;
+    border-bottom: 2px solid $header-border-color;
+  }
+}
+
+.no-item-list {
+  font-style: italic;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: $no-item-text-color;
+}
+
+.add-item {
+  box-sizing: border-box;
+  cursor: pointer;
+
+  span {
+    font-size: 1em;
+    font-weight: 500;
+  }
+}

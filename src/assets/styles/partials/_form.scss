@@ -1,0 +1,32 @@
+@import "variables";
+
+.form {
+  .form-title {
+    h5 {
+        color: $form-header-color;
+        border-bottom: 2px solid $form-header-color;
+    }
+  }
+
+  .form-label {
+    font-size: 12px;
+    margin-bottom: 25px;
+  }
+
+  .form-input {
+    width: 100%;
+    border: 2px solid $input-border-color;
+    border-radius: 0;
+  }
+
+  .close-btn {
+    cursor: pointer;
+  }
+
+  .form-button {
+    background-color: $btn-back-color;
+    font-size: .9em;
+    font-weight: 500;
+    border-radius: .5em;
+  }
+}

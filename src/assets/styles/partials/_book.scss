@@ -1,0 +1,95 @@
+@import "variables";
+
+.NoBookListed {
+  font-style: italic;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: $no-item-text-color;
+}
+
+.AddBook {
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-left: 1px;
+
+  h4 {
+    background-color: #1e427e;
+  }
+
+  span {
+    font-size: 1.1em;
+    padding-top: 2px;
+    font-weight: 600;
+  }
+}
+
+.book {
+  font-size: 1.4em;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  .icons {
+    cursor: pointer;
+    opacity: 0;
+  }
+}
+
+.book:hover {
+  background-color: $author-hover-back-color;
+
+  .icons {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .book {
+    background-color: transparent;
+
+    .icons {
+      opacity: 1;
+    }
+  }
+}
+
+.book-form {
+  .create-book {
+    color: $form-header-color;
+    border-bottom: 2px solid $form-header-color;
+    font-weight: 500;
+    font-size: 1.3em;
+  }
+
+  .close-button {
+    cursor: pointer;
+  }
+
+  .form-label {
+    font-size: small;
+    padding: 0;
+    margin: 0;
+  }
+
+  .form-control {
+    border-radius: 0;
+    border: 2px solid #959595;
+  }
+
+  .select-control__control {
+    height: calc(1.5em + 0.5rem + 2px);
+    min-height: calc(1.5em + 0.5rem + 2px);
+    align-content: center;
+  }
+
+  .invalid-feedback {
+    font-size: .9em;
+    font-weight: bold;
+  }
+
+  .form-button {
+    background-color: $btn-back-color;
+    font-size: .9em;
+    font-weight: 500;
+  }
+}
+
